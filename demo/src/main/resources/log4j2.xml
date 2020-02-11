@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+<Properties>
+        <Property name="basePath">C:\Log</Property>
+    </Properties>
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}] %5p [%t] (%F:%M:%L) - %m%n" />
+		</Console>
+ 
+		<RollingFile name="countReport" filename="${basePath}/CountRep.log"
+			filepattern="%d{yyyy-MM-dd}.gz">
+			<PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}] %5p [%t] (%F:%M:%L) - %m%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+			<DefaultRolloverStrategy max="30" />
+		</RollingFile>
+	</Appenders>
+	
+	<Loggers>
+		<Logger name="com.LogMail" level="info">
+			<AppenderRef ref="countReport" />
+		</Logger>
+		
+		<Root level="debug">
+			<AppenderRef ref="Console" level="debug" />
+		</Root>
+	</Loggers>
+</Configuration>
